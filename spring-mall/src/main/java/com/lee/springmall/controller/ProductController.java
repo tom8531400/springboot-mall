@@ -47,4 +47,10 @@ public class ProductController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
+
+    @RequestMapping(value = "/deleteProduct/{product_id}", method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteProduct(@PathVariable Integer product_id) {
+            productService.deleteProduct(product_id);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
 }
