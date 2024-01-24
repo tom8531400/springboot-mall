@@ -1,6 +1,7 @@
 package com.lee.springmall.service;
 
 import com.lee.springmall.constant.ProductCategory;
+import com.lee.springmall.dto.ProductQueryParams;
 import com.lee.springmall.dto.ProductRequest;
 import com.lee.springmall.vo.ProductVo;
 
@@ -18,7 +19,7 @@ public interface ProductService {
 
     void deleteProduct(Integer product_id);
 
-    List<ProductVo> queryProductList(ProductCategory category, String search);
+    List<ProductVo> queryProductList(ProductQueryParams params);
 
     List<ProductVo> queryAll();
 

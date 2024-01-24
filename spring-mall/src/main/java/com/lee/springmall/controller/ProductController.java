@@ -1,6 +1,7 @@
 package com.lee.springmall.controller;
 
 import com.lee.springmall.constant.ProductCategory;
+import com.lee.springmall.dto.ProductQueryParams;
 import com.lee.springmall.dto.ProductRequest;
 import com.lee.springmall.service.ProductService;
 import com.lee.springmall.vo.ProductVo;
@@ -104,7 +105,10 @@ public class ProductController {
     @RequestMapping(value = "/queryProductList", method = RequestMethod.GET)
     public ResponseEntity<List<ProductVo>> queryProductVoList(@RequestParam(required = false) ProductCategory category,
                                                               @RequestParam(required = false) String search) {
-        List<ProductVo> queryProductList = productService.queryProductList(category, search);
+        ProductQueryParams params = new ProductQueryParams();
+        params.setCategory(category);
+        params.setSearch(search);
+        List<ProductVo> queryProductList = productService.queryProductList(params);
         return ResponseEntity.status(HttpStatus.OK).body(queryProductList);
     }
 

@@ -1,6 +1,7 @@
 package com.lee.springmall.dao;
 
 import com.lee.springmall.constant.ProductCategory;
+import com.lee.springmall.dto.ProductQueryParams;
 import com.lee.springmall.dto.ProductRequest;
 import com.lee.springmall.vo.ProductVo;
 import org.apache.ibatis.annotations.*;
@@ -32,7 +33,7 @@ public interface ProductMapper {
     @Select("select * from product")
     List<ProductVo> queryAll();
 
-    @Select("select * from product where category = #{category} and product_name like '%${search}%'")
-    List<ProductVo> queryProductList(ProductCategory category, String search);
+    @Select("select * from product where category = #{params.category} and product_name like '%${params.search}%'")
+    List<ProductVo> queryProductList(@Param("params") ProductQueryParams params);
 
 }
