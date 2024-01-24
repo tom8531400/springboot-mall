@@ -26,4 +26,9 @@ public class ProductServiceImpl implements ProductService {
     public boolean createProduct(ProductRequest productRequest) {
         return productMapper.createProduct(productRequest);
     }
+
+    @Override
+    public void updateProduct(Integer product_id, ProductRequest productRequest) {
+        productMapper.updateProduct(product_id,productRequest);
+    }
 }

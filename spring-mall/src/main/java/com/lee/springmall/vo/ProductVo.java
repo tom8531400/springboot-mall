@@ -9,7 +9,6 @@ import java.util.Date;
 public class ProductVo {
     private Integer product_id;
     private String product_name;
-    // 商品分類
     private ProductCategory category;
     private String image_url;
     private Integer price;
