@@ -1,5 +1,6 @@
 package com.lee.springmall.service.impl;
 
+import com.lee.springmall.constant.ProductCategory;
 import com.lee.springmall.dao.ProductMapper;
 import com.lee.springmall.dto.ProductRequest;
 import com.lee.springmall.service.ProductService;
@@ -40,7 +41,14 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductVo> queryAllProductList() {
-        return productMapper.queryAllProductList();
+    public List<ProductVo> queryProductList(ProductCategory category, String search) {
+        return productMapper.queryProductList(category,search);
     }
+
+    @Override
+    public List<ProductVo> queryAll() {
+        return productMapper.queryAll();
+    }
+
+
 }

@@ -1,5 +1,6 @@
 package com.lee.springmall.dao;
 
+import com.lee.springmall.constant.ProductCategory;
 import com.lee.springmall.dto.ProductRequest;
 import com.lee.springmall.vo.ProductVo;
 import org.apache.ibatis.annotations.*;
@@ -23,11 +24,15 @@ public interface ProductMapper {
     @Update("update product set product_name = #{productRequest.product_name},category = #{productRequest.category}," +
             "image_url = #{productRequest.image_url}, price = #{productRequest.price}, stock = #{productRequest.stock}," +
             "description = #{productRequest.description} where product_id = #{product_id}")
-    void updateProduct(@Param("product_id") Integer product_id,@Param("productRequest") ProductRequest productRequest);
+    void updateProduct(@Param("product_id") Integer product_id, @Param("productRequest") ProductRequest productRequest);
 
     @Delete("delete from product where product_id = #{product_id}")
     void deleteProduct(@Param("product_id") Integer product_id);
 
     @Select("select * from product")
-    List<ProductVo> queryAllProductList();
+    List<ProductVo> queryAll();
+
+    @Select("select * from product where category = #{category} and product_name like '%${search}%'")
+    List<ProductVo> queryProductList(ProductCategory category, String search);
+
 }
