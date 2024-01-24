@@ -3,6 +3,8 @@ package com.lee.springmall.service;
 import com.lee.springmall.dto.ProductRequest;
 import com.lee.springmall.vo.ProductVo;
 
+import java.util.List;
+
 public interface ProductService {
 
     ProductVo getById(Integer product_id);
@@ -13,4 +15,6 @@ public interface ProductService {
     void updateProduct(Integer product_id,ProductRequest productRequest);
 
     void deleteProduct(Integer product_id);
+
+    List<ProductVo> queryAllProductList();
 }

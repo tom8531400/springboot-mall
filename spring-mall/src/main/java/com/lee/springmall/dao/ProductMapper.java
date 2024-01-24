@@ -4,6 +4,8 @@ import com.lee.springmall.dto.ProductRequest;
 import com.lee.springmall.vo.ProductVo;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+
 @Mapper
 public interface ProductMapper {
 
@@ -25,4 +27,7 @@ public interface ProductMapper {
 
     @Delete("delete from product where product_id = #{product_id}")
     void deleteProduct(@Param("product_id") Integer product_id);
+
+    @Select("select * from product")
+    List<ProductVo> queryAllProductList();
 }

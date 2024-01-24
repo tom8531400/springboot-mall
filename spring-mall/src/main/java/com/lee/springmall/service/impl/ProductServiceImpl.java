@@ -7,6 +7,8 @@ import com.lee.springmall.vo.ProductVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProductServiceImpl implements ProductService {
     @Autowired
@@ -35,5 +37,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void deleteProduct(Integer product_id) {
         productMapper.deleteProduct(product_id);
+    }
+
+    @Override
+    public List<ProductVo> queryAllProductList() {
+        return productMapper.queryAllProductList();
     }
 }
