@@ -32,12 +32,7 @@ public interface ProductMapper {
     @Select("select * from product")
     List<ProductVo> queryAll();
 
-    @Select("SELECT * FROM product WHERE "+
-            "product_name LIKE CONCAT('%', #{params.search}, '%') "+
-            "<if test='params.category != null'> "+
-            "AND category = #{params.category} "+
-            "</if> "+
-            "ORDER BY ${params.orderBy} ${params.shot}")
+    @SelectProvider(type = ProductProvider.class,method = "selectProducts")
     List<ProductVo> queryProductNotNull(@Param("params") ProductQueryParams params);
 
 }

@@ -6,9 +6,12 @@ import com.lee.springmall.dto.ProductRequest;
 import com.lee.springmall.service.ProductService;
 import com.lee.springmall.vo.ProductVo;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -104,17 +107,21 @@ public class ProductController {
      * @param shot     正排序還是倒排序
      * @return 自定義查詢列表資訊
      */
+    @Validated
     @RequestMapping(value = "/queryProductList", method = RequestMethod.GET)
     public ResponseEntity<List<ProductVo>> queryProductVoList(@RequestParam(required = false) ProductCategory category,
                                                               @RequestParam(defaultValue = "") String search,
                                                               @RequestParam(defaultValue = "created_date") String orderBy,
-                                                              @RequestParam(defaultValue = "desc") String shot) {
+                                                              @RequestParam(defaultValue = "desc") String shot,
+                                                              @RequestParam(defaultValue = "5") @Max(1000) @Min(0) Integer limit,
+                                                              @RequestParam(defaultValue = "0") @Min(0) Integer offset) {
         ProductQueryParams params = new ProductQueryParams();
         params.setCategory(category);
         params.setSearch(search);
         params.setOrderBy(orderBy);
         params.setShot(shot);
-        System.out.println(params);
+        params.setLimit(limit);
+        params.setOffset(offset);
         List<ProductVo> queryProductList = productService.queryProductList(params);
         return ResponseEntity.status(HttpStatus.OK).body(queryProductList);
     }
