@@ -35,4 +35,7 @@ public interface ProductMapper {
     @SelectProvider(type = ProductProvider.class,method = "selectProducts")
     List<ProductVo> queryProductNotNull(@Param("params") ProductQueryParams params);
 
+    @Select("select count(*) from product where category = #{params.category} ")
+    Integer countProduct(@Param("params") ProductQueryParams params);
+
 }

@@ -51,5 +51,10 @@ public class ProductServiceImpl implements ProductService {
         return productMapper.queryAll();
     }
 
+    @Override
+    public Integer countProduct(ProductQueryParams params) {
+        return productMapper.countProduct(params);
+    }
+
 
 }

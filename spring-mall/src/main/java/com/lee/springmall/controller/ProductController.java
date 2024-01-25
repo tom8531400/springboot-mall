@@ -4,6 +4,7 @@ import com.lee.springmall.constant.ProductCategory;
 import com.lee.springmall.dto.ProductQueryParams;
 import com.lee.springmall.dto.ProductRequest;
 import com.lee.springmall.service.ProductService;
+import com.lee.springmall.uill.Page;
 import com.lee.springmall.vo.ProductVo;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
@@ -109,7 +110,7 @@ public class ProductController {
      */
     @Validated
     @RequestMapping(value = "/queryProductList", method = RequestMethod.GET)
-    public ResponseEntity<List<ProductVo>> queryProductVoList(@RequestParam(required = false) ProductCategory category,
+    public ResponseEntity<Page<ProductVo>> queryProductVoList(@RequestParam(required = false) ProductCategory category,
                                                               @RequestParam(defaultValue = "") String search,
                                                               @RequestParam(defaultValue = "created_date") String orderBy,
                                                               @RequestParam(defaultValue = "desc") String shot,
@@ -123,7 +124,14 @@ public class ProductController {
         params.setLimit(limit);
         params.setOffset(offset);
         List<ProductVo> queryProductList = productService.queryProductList(params);
-        return ResponseEntity.status(HttpStatus.OK).body(queryProductList);
+        Integer total = productService.countProduct(params);
+
+        Page<ProductVo> page = new Page<>();
+        page.setLimit(limit);
+        page.setOffset(offset);
+        page.setTotal(total);
+        page.setResult(queryProductList);
+        return ResponseEntity.status(HttpStatus.OK).body(page);
     }
 
 }
