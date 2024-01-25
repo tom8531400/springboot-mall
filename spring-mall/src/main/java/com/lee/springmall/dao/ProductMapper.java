@@ -1,6 +1,5 @@
 package com.lee.springmall.dao;
 
-import com.lee.springmall.constant.ProductCategory;
 import com.lee.springmall.dto.ProductQueryParams;
 import com.lee.springmall.dto.ProductRequest;
 import com.lee.springmall.vo.ProductVo;
@@ -33,7 +32,12 @@ public interface ProductMapper {
     @Select("select * from product")
     List<ProductVo> queryAll();
 
-    @Select("select * from product where category = #{params.category} and product_name like '%${params.search}%'")
-    List<ProductVo> queryProductList(@Param("params") ProductQueryParams params);
+    @Select("SELECT * FROM product WHERE "+
+            "product_name LIKE CONCAT('%', #{params.search}, '%') "+
+            "<if test='params.category != null'> "+
+            "AND category = #{params.category} "+
+            "</if> "+
+            "ORDER BY ${params.orderBy} ${params.shot}")
+    List<ProductVo> queryProductNotNull(@Param("params") ProductQueryParams params);
 
 }

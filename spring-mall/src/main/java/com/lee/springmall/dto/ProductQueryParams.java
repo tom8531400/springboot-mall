@@ -7,13 +7,17 @@ import lombok.Data;
 public class ProductQueryParams {
     private ProductCategory category;
     private String search;
+    private String orderBy;
+    private String shot;
 
     public ProductQueryParams() {
     }
 
-    public ProductQueryParams(ProductCategory category, String search) {
+    public ProductQueryParams(ProductCategory category, String search, String orderBy, String shot) {
         this.category = category;
         this.search = search;
+        this.orderBy = orderBy;
+        this.shot = shot;
     }
 
 }

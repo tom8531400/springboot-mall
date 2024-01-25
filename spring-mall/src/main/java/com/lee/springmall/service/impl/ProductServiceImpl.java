@@ -33,7 +33,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void updateProduct(Integer product_id, ProductRequest productRequest) {
-        productMapper.updateProduct(product_id,productRequest);
+        productMapper.updateProduct(product_id, productRequest);
     }
 
     @Override
@@ -43,7 +43,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductVo> queryProductList(ProductQueryParams params) {
-        return productMapper.queryProductList(params);
+        return productMapper.queryProductNotNull(params);
     }
 
     @Override

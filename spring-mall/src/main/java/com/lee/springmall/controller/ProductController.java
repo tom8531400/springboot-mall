@@ -100,14 +100,21 @@ public class ProductController {
      *
      * @param category 商品種類
      * @param search   查詢關鍵字
+     * @param orderBy  排序依據
+     * @param shot     正排序還是倒排序
      * @return 自定義查詢列表資訊
      */
     @RequestMapping(value = "/queryProductList", method = RequestMethod.GET)
     public ResponseEntity<List<ProductVo>> queryProductVoList(@RequestParam(required = false) ProductCategory category,
-                                                              @RequestParam(required = false) String search) {
+                                                              @RequestParam(defaultValue = "") String search,
+                                                              @RequestParam(defaultValue = "created_date") String orderBy,
+                                                              @RequestParam(defaultValue = "desc") String shot) {
         ProductQueryParams params = new ProductQueryParams();
         params.setCategory(category);
         params.setSearch(search);
+        params.setOrderBy(orderBy);
+        params.setShot(shot);
+        System.out.println(params);
         List<ProductVo> queryProductList = productService.queryProductList(params);
         return ResponseEntity.status(HttpStatus.OK).body(queryProductList);
     }
