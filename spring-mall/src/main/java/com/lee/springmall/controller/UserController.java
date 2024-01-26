@@ -1,5 +1,6 @@
 package com.lee.springmall.controller;
 
+import com.lee.springmall.dto.UserLoginRequest;
 import com.lee.springmall.dto.UserRegisterRequest;
 import com.lee.springmall.service.UserService;
 import com.lee.springmall.vo.UserVo;
@@ -26,6 +27,12 @@ public class UserController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
+    }
+
+    @RequestMapping(value = "/users/login",method = RequestMethod.POST)
+    public ResponseEntity<UserVo> login(@RequestBody @Valid UserLoginRequest userLoginRequest) {
+        UserVo userVo = userService.login(userLoginRequest);
+        return ResponseEntity.status(HttpStatus.OK).body(userVo);
     }
 
 }

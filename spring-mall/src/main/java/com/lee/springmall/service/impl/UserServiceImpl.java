@@ -1,6 +1,7 @@
 package com.lee.springmall.service.impl;
 
 import com.lee.springmall.dao.UserMapper;
+import com.lee.springmall.dto.UserLoginRequest;
 import com.lee.springmall.dto.UserRegisterRequest;
 import com.lee.springmall.service.UserService;
 import com.lee.springmall.vo.UserVo;
@@ -24,7 +25,7 @@ public class UserServiceImpl implements UserService {
     public boolean register(UserRegisterRequest registerRequest) {
         UserVo userVo = userMapper.getUserByEmail(registerRequest.getEmail());
         if (userVo != null) {
-            log.warn("該email {} 已經被 {} 註冊",registerRequest.getEmail(),"其他使用者");
+            log.warn("該email {} 已經被 {} 註冊", registerRequest.getEmail(), "其他使用者");
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         } else {
             return userMapper.createUser(registerRequest);
@@ -34,5 +35,21 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserVo getUserByEmail(String email) {
         return userMapper.getUserByEmail(email);
+    }
+
+    @Override
+    public UserVo login(UserLoginRequest userLoginRequest) {
+        UserVo userVo = userMapper.getUserByEmail(userLoginRequest.getEmail());
+        if (userVo == null) {
+            log.warn("此信箱 {} 尚未註冊", userLoginRequest.getEmail());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+
+        if (userVo.getPassword().equals(userLoginRequest.getPassword())) {
+            return userVo;
+        } else {
+            log.warn("此信箱 {} 的密碼輸入不正確", userLoginRequest.getEmail());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
     }
 }
