@@ -29,7 +29,7 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = "/users/login",method = RequestMethod.POST)
+    @RequestMapping(value = "/users/login", method = RequestMethod.POST)
     public ResponseEntity<UserVo> login(@RequestBody @Valid UserLoginRequest userLoginRequest) {
         UserVo userVo = userService.login(userLoginRequest);
         return ResponseEntity.status(HttpStatus.OK).body(userVo);
