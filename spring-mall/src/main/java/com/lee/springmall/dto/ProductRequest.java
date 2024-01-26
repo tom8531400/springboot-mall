@@ -4,18 +4,27 @@ import com.lee.springmall.constant.ProductCategory;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
+/**
+ * 新增商品封裝物件
+ */
 @Data
 public class ProductRequest {
+    // 商品名稱
     @NotNull
     private String product_name;
+    // 商品種類
     @NotNull
     private ProductCategory category;
+    // 圖片URL
     @NotNull
     private String image_url;
+    // 商品價格
     @NotNull
     private Integer price;
+    // 商品庫存
     @NotNull
     private Integer stock;
+    // 商品簡介
     private String description;
 
     public ProductRequest() {

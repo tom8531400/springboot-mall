@@ -4,6 +4,9 @@ import com.lee.springmall.dto.ProductQueryParams;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.jdbc.SQL;
 
+/**
+ * 自訂義查詢SQL
+ */
 public class ProductProvider {
 
     public String selectProducts(@Param("params") ProductQueryParams params) {

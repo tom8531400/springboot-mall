@@ -13,15 +13,22 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.server.ResponseStatusException;
 
-
+/**
+ * UserServiceImpl 實作抽象類
+ */
 @Service
 public class UserServiceImpl implements UserService {
-
+    // 定義Logger
     private final static Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
     @Autowired
     private UserMapper userMapper;
 
-
+    /**
+     * 會員註冊
+     *
+     * @param registerRequest Request註冊資料
+     * @return 是否註冊成功
+     */
     @Override
     public boolean register(UserRegisterRequest registerRequest) {
         UserVo userVo = userMapper.getUserByEmail(registerRequest.getEmail());
@@ -35,11 +42,23 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+     * 依照信箱查詢會員
+     *
+     * @param email 電子信箱
+     * @return 返回查詢結果
+     */
     @Override
     public UserVo getUserByEmail(String email) {
         return userMapper.getUserByEmail(email);
     }
 
+    /**
+     * 會員登入
+     *
+     * @param userLoginRequest Request登入資訊
+     * @return 返回登入結果
+     */
     @Override
     public UserVo login(UserLoginRequest userLoginRequest) {
         UserVo userVo = userMapper.getUserByEmail(userLoginRequest.getEmail());

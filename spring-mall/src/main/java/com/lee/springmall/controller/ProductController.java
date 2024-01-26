@@ -17,6 +17,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * ProductController商品控制項
+ */
+
 @RestController
 public class ProductController {
     @Autowired

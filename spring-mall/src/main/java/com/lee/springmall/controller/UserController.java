@@ -13,11 +13,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * UserController會員控制項
+ */
 @RestController
 public class UserController {
     @Autowired
     private UserService userService;
 
+    /**
+     * 會員註冊
+     *
+     * @param registerRequest 會員註冊封裝物件
+     * @return 返回註冊資訊
+     */
     @RequestMapping(value = "/users/register", method = RequestMethod.POST)
     public ResponseEntity<UserVo> register(@RequestBody @Valid UserRegisterRequest registerRequest) {
         boolean register = userService.register(registerRequest);
@@ -29,6 +38,12 @@ public class UserController {
         }
     }
 
+    /**
+     * 會員登入
+     *
+     * @param userLoginRequest 會員登入封裝物件
+     * @return 返回登入資訊
+     */
     @RequestMapping(value = "/users/login", method = RequestMethod.POST)
     public ResponseEntity<UserVo> login(@RequestBody @Valid UserLoginRequest userLoginRequest) {
         UserVo userVo = userService.login(userLoginRequest);
