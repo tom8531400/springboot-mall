@@ -15,5 +15,5 @@ public interface UserMapper {
 
     // 依照email來查詢會員資訊
     @Select("select * from user where email = #{email}")
-    UserVo queryUser(@Param("email") String email);
+    UserVo getUserByEmail(@Param("email") String email);
 }

@@ -7,5 +7,5 @@ public interface UserService {
 
     boolean register(UserRegisterRequest registerRequest);
 
-    UserVo queryUser(String email);
+    UserVo getUserByEmail(String email);
 }

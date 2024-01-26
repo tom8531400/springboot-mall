@@ -21,7 +21,7 @@ public class UserController {
     public ResponseEntity<UserVo> register(@RequestBody @Valid UserRegisterRequest registerRequest) {
         boolean register = userService.register(registerRequest);
         if (register) {
-            UserVo userVo = userService.queryUser(registerRequest.getEmail());
+            UserVo userVo = userService.getUserByEmail(registerRequest.getEmail());
             return ResponseEntity.status(HttpStatus.CREATED).body(userVo);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
