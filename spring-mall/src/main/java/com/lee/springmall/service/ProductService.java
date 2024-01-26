@@ -1,6 +1,5 @@
 package com.lee.springmall.service;
 
-import com.lee.springmall.constant.ProductCategory;
 import com.lee.springmall.dto.ProductQueryParams;
 import com.lee.springmall.dto.ProductRequest;
 import com.lee.springmall.vo.ProductVo;

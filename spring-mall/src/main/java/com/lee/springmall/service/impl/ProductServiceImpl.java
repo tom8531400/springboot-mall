@@ -1,6 +1,5 @@
 package com.lee.springmall.service.impl;
 
-import com.lee.springmall.constant.ProductCategory;
 import com.lee.springmall.dao.ProductMapper;
 import com.lee.springmall.dto.ProductQueryParams;
 import com.lee.springmall.dto.ProductRequest;
