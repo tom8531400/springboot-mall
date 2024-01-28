@@ -24,11 +24,13 @@ public class OrderController {
      * @return 最新一筆訂單編號
      */
     @RequestMapping(value = "/users/{userId}/order", method = RequestMethod.POST)
-    public ResponseEntity<?> createOrder(@PathVariable Integer userId,
+    public ResponseEntity<OrderVo> createOrder(@PathVariable Integer userId,
                                          @RequestBody @Valid CreateOrderRequest createOrderRequest) {
         // 創建訂單物件獲取最新一筆訂單編號
         OrderVo orderVo = new OrderVo();
         Integer createOrder = orderService.createOrder(userId, createOrderRequest, orderVo);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createOrder);
+
+        OrderVo orderData = orderService.getByOrderId(createOrder);
+        return ResponseEntity.status(HttpStatus.CREATED).body(orderData);
     }
 }

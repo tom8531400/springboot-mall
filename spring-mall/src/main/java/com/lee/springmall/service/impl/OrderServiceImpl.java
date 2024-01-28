@@ -4,6 +4,7 @@ import com.lee.springmall.dao.OrderMapper;
 import com.lee.springmall.dao.ProductMapper;
 import com.lee.springmall.dto.BuyItem;
 import com.lee.springmall.dto.CreateOrderRequest;
+import com.lee.springmall.dto.OrderItemAndProduct;
 import com.lee.springmall.service.OrderService;
 import com.lee.springmall.vo.OrderItem;
 import com.lee.springmall.vo.OrderVo;
@@ -28,9 +29,10 @@ public class OrderServiceImpl implements OrderService {
 
     /**
      * 新增訂單
-     * @param userId 會員編號
+     *
+     * @param userId             會員編號
      * @param createOrderRequest 訂單封裝檔
-     * @param orderVo 會員訂單資訊
+     * @param orderVo            會員訂單資訊
      * @return 最新一筆訂單編號
      */
     @Transactional
@@ -63,5 +65,21 @@ public class OrderServiceImpl implements OrderService {
             orderMapper.createOrderItem(orderId, data);
         }
         return orderId;
+    }
+
+    /**
+     * 透過orederID獲取會員訂單資訊
+     * @param orderId 訂單編號
+     * @return 訂單資訊
+     */
+    @Override
+    public OrderVo getByOrderId(Integer orderId) {
+        // 獲取會員訂單
+        OrderVo order = orderMapper.getByOrderId(orderId);
+        // 獲取訂單資訊
+        List<OrderItemAndProduct> OrderItemAndProduct = orderMapper.getOrderItemByOrderId(orderId);
+        order.setOrderItemList(OrderItemAndProduct);
+
+        return order;
     }
 }
