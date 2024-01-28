@@ -48,4 +48,8 @@ public interface ProductMapper {
     @Select("select count(*) from product where category = #{params.category} ")
     Integer countProduct(@Param("params") ProductQueryParams params);
 
+    // 判斷庫存足夠後，並且把庫存的數量扣掉訂單的數量，更新數據
+    @Update("update product set stock = #{endStock} where product_id = #{product_id}")
+    void updateProductStock(@Param("product_id") Integer product_id, @Param("endStock") Integer endStock);
+
 }

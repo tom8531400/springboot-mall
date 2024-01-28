@@ -19,13 +19,14 @@ public class OrderController {
 
     /**
      * 新增訂單
-     * @param userId 會員編號
+     *
+     * @param userId             會員編號
      * @param createOrderRequest 訂單封裝物件
      * @return 最新一筆訂單編號
      */
     @RequestMapping(value = "/users/{userId}/order", method = RequestMethod.POST)
     public ResponseEntity<OrderVo> createOrder(@PathVariable Integer userId,
-                                         @RequestBody @Valid CreateOrderRequest createOrderRequest) {
+                                               @RequestBody @Valid CreateOrderRequest createOrderRequest) {
         // 創建訂單物件獲取最新一筆訂單編號
         OrderVo orderVo = new OrderVo();
         Integer createOrder = orderService.createOrder(userId, createOrderRequest, orderVo);
